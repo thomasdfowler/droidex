@@ -28,6 +28,8 @@ import javax.swing.*;
 import com.android.ddmlib.AndroidDebugBridge;
 import com.android.ddmlib.IDevice;
 import com.android.ddmlib.RawImage;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 
 public class DroidEx extends JPanel {
 	private BufferedImage image=null;
@@ -37,9 +39,11 @@ public class DroidEx extends JPanel {
 	private boolean firstRun=true;
 	private double scale=1.5;
 	private BufferedImageOp op=null;
+	private StartupOptions options;
 	
-	public DroidEx(double scale) throws IOException {
-		this.scale=scale;
+	public DroidEx(StartupOptions options) throws IOException {
+		this.options=options;
+		this.scale=options.scale;
 		
 		AffineTransform tx=AffineTransform.getScaleInstance(scale, scale);
 		
@@ -89,11 +93,11 @@ public class DroidEx extends JPanel {
 			image=new BufferedImage(rawImage.width, rawImage.height,
 															BufferedImage.TYPE_INT_ARGB);
 			
-			int index = 0;
-      int IndexInc = rawImage.bpp >> 3;
+			int index=0;
+      int IndexInc=rawImage.bpp >> 3;
 
-      for (int y = 0 ; y < rawImage.height ; y++) {
-	      for (int x = 0 ; x < rawImage.width ; x++) {
+      for (int y=0 ; y < rawImage.height ; y++) {
+	      for (int x=0 ; x < rawImage.width ; x++) {
 					int value=rawImage.getARGB(index);
 
 					index += IndexInc;
@@ -123,8 +127,8 @@ public class DroidEx extends JPanel {
 	}
 	
 	protected void paintComponent(Graphics g) {
-		int x = (getWidth()-size.width)/2;
-		int y = (getHeight()-size.height)/2;
+		int x=(getWidth()-size.width)/2;
+		int y=(getHeight()-size.height)/2;
 		g.drawImage(image, x, y, this);
 	}
 	
@@ -133,8 +137,19 @@ public class DroidEx extends JPanel {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		double scale=(args.length>0 ? Double.valueOf(args[0]).doubleValue() : 1.0d);
-		
-		DroidEx droidex=new DroidEx(scale);
+		StartupOptions options=new StartupOptions();
+		CmdLineParser parser=new CmdLineParser(options);
+
+		try {
+			// options contain the parsed args
+			parser.parseArgument(args);
+			DroidEx droidex=new DroidEx(options);
+			droidex.setVisible(true);
+		}
+		catch (CmdLineException e) {
+			System.err.println(e.getMessage());
+			System.err.println("droidex [options...]");
+			parser.printUsage(System.err);
+		}
 	}
 }
