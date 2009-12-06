@@ -17,13 +17,12 @@
 
 package com.commonsware.droidex;
 
-// import com.commonsware.droidex.image.Orientation;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.Option;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import com.commonsware.droidex.image.Orientation;
+import org.kohsuke.args4j.Argument;
+import org.kohsuke.args4j.Option;
 
 /**
  * Startup options parsed from command line arguments.
@@ -44,8 +43,8 @@ public class StartupOptions {
 	/**
 	 * The initial rotation, should be "portrait" or "landscape".
 	 */
-//	@Option(name = "-o", aliases = "--orientation", usage = "portrait | landscape")
-//	public Orientation orientation;
+	@Option(name = "-o", aliases = "--orientation", usage = "portrait | landscape")
+	public Orientation orientation;
 
 	@Option(name = "-f", aliases = "--framerate", usage = "the screen refresh rate (frames per second)")
 	public int frameRate = 10;
