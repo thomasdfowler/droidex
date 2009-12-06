@@ -13,28 +13,29 @@ This version of DroidEx works with the Android 2.0 SDK.
 
 Usage
 -----
-This version of `droidex` takes 0-1 command-line parameters. The one
-possible parameter is a floating-point value representing by how much
-to scale the image (e.g., a scale of 1.25 on an HVGA device will give you
-a 600x400 projected image). By default, the scale is 1.0, meaning the
-project image will be as many pixels as is the physical screen size.
+This version of `droidex` takes an optional -s switch, with a floating-point
+value representing by how much to scale the image (e.g., -s 1.25 on an
+HVGA device will give you a 600x400 projected image). By default, the
+scale is 1.0, meaning the project image will be as many pixels as is
+the physical screen size.
 
 ### Linux & OS X
 
 Set your ANDROID_HOME environment variable to point to the base directory
 where your Android SDK is installed. Then, just run the `droidex` shell
-script.
+script from the `droidex/` directory.
 
 ### Windows
 
 It is probably easiest to just copy the `droidex` shell script to a
 `droidex.cmd` batch file, change the classpath separator, replace `$ANDROID_HOME`
 with the proper value for your PC, and use the batch file. Also, you will
-need to replace `$1` with `%1`.
+need to replace `$1` with `%1`, etc.
 
 Dependencies
 ------------
-The Android 2.0 SDK, or at least ddmlib.jar.
+The Android 2.0 SDK, or at least ddmlib.jar. DroidEx also uses args4j, a
+compatible copy of which is included in the repo.
 
 Compatibility
 -------------
@@ -50,7 +51,8 @@ DroidEx is known not to work with:
 
 Version
 -------
-This is version 1.0, meaning DroidEx has been used a fair bit.
+Version 1.0, meaning DroidEx has been used a fair bit. The head is what
+is documented here and is somewhat more leading-edge.
 
 License
 -------
