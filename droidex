@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp bin/DroidEx.jar:$ANDROID_HOME/tools/lib/ddmlib.jar:lib/args4j-2.0.16.jar com.commonsware.droidex.DroidEx $1
+java -cp bin/DroidEx.jar:$ANDROID_HOME/tools/lib/ddmlib.jar:lib/args4j-2.0.16.jar com.commonsware.droidex.DroidEx $1 $2 $3 $4 $5 $6
